@@ -79,7 +79,7 @@ def main():
     print("\nPerforming Time Series Forecasting...")
     forecast_data = data[['Date', 'AveragePrice']].copy()  
     forecast_data.set_index('Date', inplace=True)  
-    forecast_data = forecast_data.resample('M').mean().fillna(method='ffill')  
+    forecast_data = forecast_data.resample('ME').mean().fillna(method='ffill')  
 
     forecast = avocado_forecasting(forecast_data)
     print(f"Forecast for next 12 months:\n{forecast}")

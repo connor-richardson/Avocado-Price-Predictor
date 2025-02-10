@@ -11,8 +11,8 @@ def avocado_forecasting(data):
 
     # * Set frequency
     if data.index.freq is None:
-        data = data.asfreq('M')  # Monthly default
-        print("Frequency was not set. Defaulted to 'M' (monthly).")
+        data = data.asfreq('ME')  # Monthly default
+        print("Frequency was not set. Defaulted to 'ME' (monthly).")
 
     # * Check stationarity with Augmented Dickey-Fuller
     print("\nChecking stationarity with ADF test:")
@@ -47,7 +47,7 @@ def avocado_forecasting(data):
     print(forecast)
 
     # * Forecast visuals
-    forecast_index = pd.date_range(start=data.index[-1] + pd.offsets.MonthEnd(), periods=12, freq='M')
+    forecast_index = pd.date_range(start=data.index[-1] + pd.offsets.MonthEnd(), periods=12, freq='ME')
     plt.figure(figsize=(10, 6))
     plt.plot(data.index, data['AveragePrice'], label='Historical Prices')
     plt.plot(forecast_index, forecast, label='Forecasted Prices', color='red')
@@ -70,6 +70,6 @@ def avocado_forecasting(data):
 #     raw_data = raw_data.sort_values(by='Date')
 #     time_series_data = raw_data[['Date', 'AveragePrice']].copy()
 #     time_series_data.set_index('Date', inplace=True)
-#     time_series_data = time_series_data.resample('M').mean()
+#     time_series_data = time_series_data.resample('ME').mean()
 
 #     forecast = avocado_forecasting(time_series_data)
