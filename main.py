@@ -5,19 +5,20 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error
-from forecasting import avocado_forecasting
+
 
 
 def main():
     avocado_file_path = 'data/avocado.csv'
     data = pd.read_csv(avocado_file_path)
+    data = data.drop('Unnamed: 0',axis = 1)
+
+    print("\nData head:")
+    print(data.head())
 
     # Data information
     print("\nDataset Information:")
     print(data.info())
-
-    print("\nFirst Five Rows:")
-    print(data.head())
 
     print("\nDescriptive Statistics:")
     print(data.describe())
@@ -74,6 +75,7 @@ def main():
     plt.show()
 
     # * Forecasting
+    from forecasting import avocado_forecasting
     print("\nPerforming Time Series Forecasting...")
     forecast_data = data[['Date', 'AveragePrice']].copy()  
     forecast_data.set_index('Date', inplace=True)  
